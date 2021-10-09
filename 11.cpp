@@ -85,8 +85,8 @@ void sortdata(float totalaver[5],float scoreaverage[5][3],string (&idname)[5][2]
 		    {
 			    if(totalaver[i]<totalaver[j])
                 {
-                    temp  = totalaver[i],scoreaverage[i][j],idname[i][j];
-                    totalaver[i]=totalaver[j],scoreaverage[i][j],idname[i][j];
+                    temp  = totalaver[i];
+                    totalaver[i]=totalaver[j];
                     totalaver[j]=temp;
                 }
             }
