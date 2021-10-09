@@ -5,7 +5,7 @@ using namespace std;
 void getdataidname(string (&idname)[5][2]);
 void getdat_test(int scoretest[5][3]);
 void averge(int scoretest[5][3],float scoreaverage[5][3],float totalaver[5]);
-void sortdata(float totalaver[5]);
+void sortdata(float totalaver[5],float scoreaverage[5][3],string (&idname)[5][2]);
 void displaydata(std::string (&idname)[5][2],int scoretest[5][3],float scoreaverage[5][3],float totalaver[5]);
 
 int main() 
@@ -21,7 +21,7 @@ int main()
     getdataidname(idname);
     getdat_test(scoretest);
     averge(scoretest,scoreaverage,totalaver);
-    sortdata(totalaver);
+    sortdata(totalaver,scoreaverage,idname);
     displaydata(idname,scoretest,scoreaverage,totalaver);
 }
 
@@ -75,7 +75,7 @@ void averge(int scoretest[5][3],float scoreaverage[5][3],float totalaver[5])
     
 
 }
-void sortdata(float totalaver[5])
+void sortdata(float totalaver[5],float scoreaverage[5][3],string (&idname)[5][2])
 {
    int r = 5,c = 2,n = 5;
    int i,j,temp;
@@ -83,10 +83,10 @@ void sortdata(float totalaver[5])
 	    {		
 		    for(j=i+1;j<n;j++)
 		    {
-			    if(totalaver[i]>totalaver[j])
+			    if(totalaver[i]<totalaver[j])
                 {
-                    temp  =totalaver[i];
-                    totalaver[i]=totalaver[j];
+                    temp  = totalaver[i],scoreaverage[i][j],idname[i][j];
+                    totalaver[i]=totalaver[j],scoreaverage[i][j],idname[i][j];
                     totalaver[j]=temp;
                 }
             }
