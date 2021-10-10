@@ -4,9 +4,9 @@
 using namespace std; 
 void getdataidname(string (&idname)[5][2]);
 void getdat_test(int scoretest[5][3]);
-void averge(int scoretest[5][3],float scoreaverage[5][4],float totalaver[5]);
-//void sortdata(float totalaver[5],float scoreaverage[5][3],string (&idname)[5][2]);
-void displaydata(std::string (&idname)[5][2],int scoretest[5][3],float scoreaverage[5][4],float totalaver[5]);
+void averge(int scoretest[5][3],float scoreaverage[5][3],float totalaver[5]);
+void sortdata(float totalaver[5]);
+void displaydata(std::string (&idname)[5][2],int scoretest[5][3],float scoreaverage[5][3],float totalaver[5]);
 
 int main() 
 {  
@@ -16,12 +16,12 @@ int main()
     std::string idname[5][2];
     std::string totaldata[5][5];
     int scoretest[5][3];
-    float scoreaverage[5][4];
+    float scoreaverage[5][3];
     float totalaver[5];
     getdataidname(idname);
     getdat_test(scoretest);
     averge(scoretest,scoreaverage,totalaver);
-    //sortdata(totalaver,scoreaverage,idname);
+    sortdata(totalaver);
     displaydata(idname,scoretest,scoreaverage,totalaver);
 }
 
@@ -53,30 +53,46 @@ void getdat_test(int scoretest[5][3])
         cout << "----------------------------------\n";
     }
 }
-void averge(int scoretest[5][3],float scoreaverage[5][4],float totalaver[5])
+void averge(int scoretest[5][3],float scoreaverage[5][3],float totalaver[5])
 {
     int r = 5,c = 3;
      for(int i=0;i<r;i++)  
     {
-        for(int j=0;j<4;j++)
+        for(int j=0;j<c;j++)
         {
             if(j < 2 )
             {
                 scoreaverage[i][j] = scoretest[i][j]*0.25;
                 totalaver[i] = totalaver[i]+scoreaverage[i][j];
-                scoreaverage[i][j] = totalaver[i];
             }
             else
             {
                 scoreaverage[i][j] = scoretest[i][j]*0.50;
                 totalaver[i] = totalaver[i]+scoreaverage[i][j];
-                scoreaverage[i][j] = totalaver[i];
             }
         } 
     }
-}
 
-void displaydata(std::string (&idname)[5][2],int scoretest[5][3],float scoreaverage[5][4],float totalaver[5])
+
+}
+void sortdata(float totalaver[5])
+{
+   int r = 5,c = 2,n = 5;
+   int i,j,temp;
+    for(i=0;i<n;i++)
+	    {		
+		    for(j=i+1;j<n;j++)
+		    {
+			    if(totalaver[i]>totalaver[j])
+                {
+                    temp  =totalaver[i];
+                    totalaver[i]=totalaver[j];
+                    totalaver[j]=temp;
+                }
+            }
+        }
+}
+void displaydata(std::string (&idname)[5][2],int scoretest[5][3],float scoreaverage[5][3],float totalaver[5])
 {
     int r = 5,c = 2,n = 5;
     cout << "--------------------------------------------------------------\n";
@@ -89,14 +105,12 @@ void displaydata(std::string (&idname)[5][2],int scoretest[5][3],float scoreaver
         {
             cout <<"\t" << idname[i][j];
         }
-        for(int j=0;j<4;j++)
+        for(int j=0;j<3;j++)
         {
             cout <<"\t" << scoreaverage[i][j];
         }
-        //cout << "\t" << totalaver[i];
+        cout << "\t" << totalaver[i];
         cout <<endl;
 
     }
 }
-
-
