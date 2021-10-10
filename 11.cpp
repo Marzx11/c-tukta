@@ -3,26 +3,17 @@
 #include<string.h>
 using namespace std; 
 void getdataidname(string (&idname)[5][2]);
-void getdat_test(int scoretest[5][3]);
-void averge(int scoretest[5][3],float scoreaverage[5][3],float totalaver[5]);
-void sortdata(float totalaver[5]);
-void displaydata(std::string (&idname)[5][2],int scoretest[5][3],float scoreaverage[5][3],float totalaver[5]);
+void getdat_test(float scoretest1[],float scoretest2[],float scoretest3[]);
+void cal_test(float scoretest1[],float scoretest2[],float scoretest3[],float scora1[],float scora2[],float scora3[],float total[]);
+void sortdata(float a[]){;
+void cal_test(float scora1[],float scora2[],float scora3[],float total[],float avg[]);
+void cal_test(float scora1[],float scora2[],float scora3[],float total[],float avg[]);
 
 int main() 
 {  
-    int r = 5;
-    int c = 2;
-    const int max = r;
     std::string idname[5][2];
-    std::string totaldata[5][5];
-    int scoretest[5][3];
-    float scoreaverage[5][3];
-    float totalaver[5];
     getdataidname(idname);
-    getdat_test(scoretest);
-    averge(scoretest,scoreaverage,totalaver);
-    sortdata(totalaver);
-    displaydata(idname,scoretest,scoreaverage,totalaver);
+    
 }
 
 void getdataidname(string (&idname)[5][2])
@@ -38,79 +29,63 @@ void getdataidname(string (&idname)[5][2])
         cout << "----------------------------------\n";
     }
 }
-void getdat_test(int scoretest[5][3])
+void getdat_test(float scoretest1[],float scoretest2[],float scoretest3[])
 {
-    int r = 5,c = 3;
-    int numdata[c] = {1,2,3};
-    int num[r] = {1,2,3,4,5};
-     for(int i=0;i<r;i++)  
-    {
-        for(int j=0;j<c;j++)
-        {
-        cout << num[i] << ". Enter Score Test " << j+1 << " : " ;
-        cin >> scoretest[i][j];
-        }
-        cout << "----------------------------------\n";
-    }
-}
-void averge(int scoretest[5][3],float scoreaverage[5][3],float totalaver[5])
-{
+    srand(time(0));
     int r = 5,c = 3;
      for(int i=0;i<r;i++)  
     {
-        for(int j=0;j<c;j++)
-        {
-            if(j < 2 )
-            {
-                scoreaverage[i][j] = scoretest[i][j]*0.25;
-                totalaver[i] = totalaver[i]+scoreaverage[i][j];
-            }
-            else
-            {
-                scoreaverage[i][j] = scoretest[i][j]*0.50;
-                totalaver[i] = totalaver[i]+scoreaverage[i][j];
-            }
-        } 
+        scoretest1[i] = rand() % 100 + 1;
+        scoretest2[i] = rand() % 100 + 1;
+        scoretest3[i] = rand() % 100 + 1;
     }
-
-
 }
-void sortdata(float totalaver[5])
+void cal_test(float scoretest1[],float scoretest2[],float scoretest3[],float scora1[],float scora2[],float scora3[],float total[])
 {
-   int r = 5,c = 2,n = 5;
-   int i,j,temp;
-    for(i=0;i<n;i++)
-	    {		
-		    for(j=i+1;j<n;j++)
-		    {
-			    if(totalaver[i]>totalaver[j])
-                {
-                    temp  =totalaver[i];
-                    totalaver[i]=totalaver[j];
-                    totalaver[j]=temp;
-                }
-            }
-        }
-}
-void displaydata(std::string (&idname)[5][2],int scoretest[5][3],float scoreaverage[5][3],float totalaver[5])
-{
-    int r = 5,c = 2,n = 5;
-    cout << "--------------------------------------------------------------\n";
-    cout << "  No." << "\tId" << "\tName" << "\ttest1(25%) " << "\ttest2(25%) " << "\ttest3(50%) " << "\tTotal(100%) \n";
-    cout << "--------------------------------------------------------------\n";
-     for(int i=0;i<r;i++)
+    int r = 5;
+     for(int i=0;i<r;i++)  
     {
-        cout << i+1 << ". ";
-        for(int j=0;j<c;j++)
-        {
-            cout <<"\t" << idname[i][j];
-        }
-        for(int j=0;j<3;j++)
-        {
-            cout <<"\t" << scoreaverage[i][j];
-        }
-        cout << "\t" << totalaver[i];
-        cout <<endl;
-
+        scora1[i] = scoretest1*0.25;
+        scora2[i] = scoretest2*0.25;
+        scora3[i] = scoretest3*0.50;
+        sortdata(scora1);
+        sortdata(scora2);
+        sortdata(scora3);
     }
+    for(int i = 0; i < 5; i++){
+		total[i] = scora1[i] + scora2[i] + scora3[i];
+	}
+}
+void sortdata(float a[]){
+	int i, k, j;
+    for (i = 1; i < 20; i++) {
+        k = a[i];
+        j = i - 1;
+        while (j >= 0 && a[j] < k) {
+            a[j + 1] = a[j];
+            j = j - 1;
+        }
+        a[j + 1] = k;
+    }
+}
+void cal_test(float scora1[],float scora2[],float scora3[],float total[],float avg[])
+{
+    for (int i = 0; i < 4; i++) {
+        avg[i] = 0;
+    }
+    for (int i = 0; i < 5; i++) {
+        avg[0] += scora1[i];
+        avg[1] += scora2[i];
+        avg[2] += scora3[i];
+        avg[3] += total[i];
+    }
+}
+
+void displaydata(string (&idname)[5][2],float scora1[],float scora2[],float scora3[],float total[],float avg[]) 
+{
+	int n = 20;
+    cout << " ----------------------------------------------------------------------------------" << endl;
+    cout << "  NO.    ID       NAME          Test1(25%)    Test2(25%)    Test3(50%)   Total(100%)" << endl;
+    cout << " ----------------------------------------------------------------------------------" << endl;
+  
 }
