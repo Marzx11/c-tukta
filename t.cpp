@@ -8,7 +8,7 @@ void sortdata(float totalaver[5])
 		    {
 			    if(totalaver[i]>totalaver[j])
                 {
-                    temp  =totalaver[i];
+                    temp  = totalaver[i];
                     totalaver[i]=totalaver[j];
                     totalaver[j]=temp;
                 }

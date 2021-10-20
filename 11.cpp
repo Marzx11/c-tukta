@@ -4,8 +4,8 @@
 using namespace std; 
 void getdataidname(string (&idname)[5][2]);
 void getdat_test(float scoretest1[5],float scoretest2[5],float scoretest3[5]);
-void cal_test(float scoretest1[5],float scoretest2[5],float scoretest3[5],float scora1[5],float scora2[5],float scora3[5],float total[5]);
-void sortdata(float a[5]);
+void cal_test(string (&idname)[5][2],float scoretest1[5],float scoretest2[5],float scoretest3[5],float scora1[5],float scora2[5],float scora3[5],float total[5]);
+void sortdata(string (&idname)[5][2],float a[5]);
 void cal_avg(float scora1[5],float scora2[5],float scora3[5],float total[5],float avg[5]);
 void displaydata(string (&idname)[5][2],float scora1[5],float scora2[5],float scora3[5],float total[5],float avg[4]);
 
@@ -15,7 +15,7 @@ int main()
     float scoretest1[5],scoretest2[5],scoretest3[5],scora1[5],scora2[5],scora3[5],total[5],avg[4];
     getdataidname(idname);
     getdat_test(scoretest1,scoretest2,scoretest3);
-    cal_test(scoretest1,scoretest2,scoretest3,scora1,scora2,scora3,total);
+    cal_test(idname,scoretest1,scoretest2,scoretest3,scora1,scora2,scora3,total);
     cal_avg(scora1,scora2,scora3,total,avg);
     displaydata(idname,scora1,scora2,scora3,total,avg);
 }
@@ -39,12 +39,12 @@ void getdat_test(float scoretest1[5],float scoretest2[5],float scoretest3[5])
     int r = 5,c = 3;
      for(int i=0;i<r;i++)  
     {
-        scoretest1[i] = rand() % 100 + 1;
-        scoretest2[i] = rand() % 100 + 1;
-        scoretest3[i] = rand() % 100 + 1;
+        scoretest1[i] = rand() % 100;
+        scoretest2[i] = rand() % 100;
+        scoretest3[i] = rand() % 100;
     }
 }
-void cal_test(float scoretest1[5],float scoretest2[5],float scoretest3[5],float scora1[5],float scora2[5],float scora3[5],float total[5])
+void cal_test(string (&idname)[5][2],float scoretest1[5],float scoretest2[5],float scoretest3[5],float scora1[5],float scora2[5],float scora3[5],float total[5])
 {
     int r = 5;
      for(int i=0;i<r;i++)  
@@ -52,16 +52,16 @@ void cal_test(float scoretest1[5],float scoretest2[5],float scoretest3[5],float 
         scora1[i] = scoretest1[i]*0.25;
         scora2[i] = scoretest2[i]*0.25;
         scora3[i] = scoretest3[i]*0.50;
-        sortdata(scora1);
-        sortdata(scora2);
-        sortdata(scora3);
+        sortdata(idname,scora1);
+        sortdata(idname,scora2);
+        sortdata(idname,scora3);
     }
     for(int i = 0; i < 5; i++)
     {
 		total[i] = scora1[i] + scora2[i] + scora3[i];
 	}
 }
-void sortdata(float a[5]){
+void sortdata(string (&idname)[5][2],float a[5]){
 	int i, k, j;
     for (i = 1; i < 5; i++) {
         k = a[i];
